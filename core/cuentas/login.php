@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     session_start();
-    $_SESSION['usuario'] = $usuario;
+    $_SESSION['usuario_rut'] = $usuario['rut']; // como usar: session_start(); echo $_SESSION['usuario_rut']; 
+    $_SESSION['usuario_rol'] = $usuario['rol'];
     echo json_encode(['success' => true]);
 } else {
     echo json_encode(['error' => 'Petición inválida.']);
