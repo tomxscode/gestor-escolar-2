@@ -2,15 +2,20 @@
 require_once '../database/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $rut = $_POST['rut'];
-    $nombres = $_POST['nombres'];
-    $apellidos = $_POST['apellidos'];
-    $email = $_POST['email'];
-    $direccion = $_POST['direccion'];
-    $telefono = $_POST['telefono'];
-    $rol = $_POST['rol'];
-    $permisos = $_POST['permisos'];
-    $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    $rut = $data->rut;
+    $nombres = $data->nombres;
+    $apellidos = $data->apellidos;
+    $email = $data->email;
+    $direccion = $data->direccion;
+    $telefono = $data->telefono;
+    $rol = $data->rol;
+    $permisos = 1;
+    $contrasena = password_hash("tomas12", PASSWORD_DEFAULT);
+    //$permisos = $_POST['permisos'];
+    //$contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
 
     $query = "INSERT INTO usuarios (rut, nombres, apellidos, email, contrasena, direccion, telefono, rol, permisos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conexion, $query);

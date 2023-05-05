@@ -2,12 +2,12 @@
 require_once '../database/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['rut'];
+    $rut = $_POST['rut'];
     $contrasena = $_POST['contrasena'];
 
     $query = "SELECT * FROM usuarios WHERE rut = ?";
     $stmt = mysqli_prepare($conexion, $query);
-    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_bind_param($stmt, "s", $rut);
     mysqli_stmt_execute($stmt);
     $resultado = mysqli_stmt_get_result($stmt);
     $usuario = mysqli_fetch_assoc($resultado);
@@ -31,3 +31,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['error' => 'Petición inválida.']);
 }
+?>
