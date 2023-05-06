@@ -1,5 +1,23 @@
 document.addEventListener("DOMContentLoaded", function (event) {
   const formMiCuenta = document.getElementById('micuenta-form');
+  const btnModificar = document.getElementById('btnModificar');
+  const btnGuardar = document.getElementById('btnGuardar');
+
+  btnGuardar.style.display = 'none';
+
+  btnModificar.addEventListener('click', function(event) {
+    let inputs = formMiCuenta.querySelectorAll('input');
+    inputs.forEach(input => {
+      if (input.type == 'email') {
+        input.disabled = true;
+      } else {
+        input.disabled = false;
+      }
+    })
+
+    // Mostrar botón de Guardar
+    btnGuardar.style.display = 'block';
+  })
 
   formMiCuenta.addEventListener('submit', function (event) {
     event.preventDefault();
