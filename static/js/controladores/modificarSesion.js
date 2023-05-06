@@ -2,10 +2,14 @@ const formMiCuenta = document.getElementById('micuenta-form');
 
 formMiCuenta.addEventListener('submit', function (event) {
   event.preventDefault();
+  
+});
+
+addEventListener("DOMContentLoaded", (event) => {
   obtenerInformacion()
     .then(json => establecerValoresFormulario(json))
     .catch(error => console.error(error));
-});
+})
 
 function obtenerInformacion() {
   return fetch('.././core/cuentas/obtener_info.php', {
