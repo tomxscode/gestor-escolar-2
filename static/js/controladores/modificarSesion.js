@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   telefonoInput = document.querySelector('input[name="telefono"]');
   emailInput = document.querySelector('input[name="email"]');
 
-  btnModificar.addEventListener('click', function(event) {
+  btnModificar.addEventListener('click', function (event) {
     direccionInput.disabled = false;
     telefonoInput.disabled = false;
     emailInput.disabled = false;
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     event.preventDefault();
   });
 
-  direccionInput.addEventListener('input', function() {
+  direccionInput.addEventListener('input', function () {
     if (direccionInput.value.trim() === '') {
       direccionInput.classList.add('is-invalid');
     } else {
@@ -32,15 +32,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   });
 
-  emailInput.addEventListener('input', function() {
+  emailInput.addEventListener('input', function () {
     if (emailInput.value.trim() === '') {
       emailInput.classList.add('is-invalid');
     } else {
       emailInput.classList.remove('is-invalid');
     }
   });
-  
-  telefonoInput.addEventListener('input', function() {
+
+  telefonoInput.addEventListener('input', function () {
     if (telefonoInput.value.trim() === '') {
       telefonoInput.classList.add('is-invalid');
     } else {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   });
 
-  btnGuardar.addEventListener('click', function(event) {
+  btnGuardar.addEventListener('click', function (event) {
     let dirValue = direccionInput.value;
     let telValue = telefonoInput.value;
     let emailValue = emailInput.value;
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({direccion: dirValue, telefono: telValue, email: emailValue})
+        body: JSON.stringify({ direccion: dirValue, telefono: telValue, email: emailValue })
       })
         .then(response => response.json())
         .then(data => {
@@ -102,6 +102,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
         input.value = json[key];
       }
     }
+    let rolInput = formMiCuenta.querySelector('[name="rol"]');
+    let titulo;
+    switch (parseInt(rolInput.value)) {
+      case 6:
+        titulo = "Administrador";
+        break;
+      case 5:
+        titulo = "Inspector";
+        break;
+      case 4:
+        titulo = "Funcionario";
+        break;
+      case 3:
+        titulo = "Profesor";
+        break;
+      case 2:
+        titulo = "Alumno";
+        break;
+      case 1:
+        titulo = "Invitado";
+        break;
+      default:
+        titulo = "No válido";
+        break;
+    }
+    rolInput.value = titulo;
   }
 
   // Obtiene información y establece valores del formulario

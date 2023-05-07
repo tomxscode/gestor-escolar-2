@@ -9,6 +9,13 @@
 </head>
 <body>
   <div class="container">
+    <?php
+      require_once "../core/cuentas/permisos.php";
+      if (!visibleDesde(2)) {
+        require_once "../views/global/sin_permiso.html";
+        exit();
+    }
+    ?>
     <div class="row">
       <div class="alertas" id="alertasContainer"></div>
       <div class="col-xl-8">
