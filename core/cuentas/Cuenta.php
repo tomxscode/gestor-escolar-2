@@ -1,13 +1,16 @@
 <?php
 
-class Usuario {
+class Usuario
+{
   private $conexion;
 
-  public function __construct($conexion) {
+  public function __construct($conexion)
+  {
     $this->conexion = $conexion;
   }
 
-  public function login($rut, $contrasena) {
+  public function login($rut, $contrasena)
+  {
     $query = "SELECT * FROM usuarios WHERE rut = ?";
     $stmt = mysqli_prepare($this->conexion, $query);
     mysqli_stmt_bind_param($stmt, "s", $rut);
@@ -29,10 +32,12 @@ class Usuario {
     session_start();
     $_SESSION['usuario_rut'] = $usuario['rut'];
     $_SESSION['usuario_rol'] = $usuario['rol'];
+    $_SESSION['usuario_permisos'] = $usuario['permisos_id'];
     return ['success' => true];
   }
 
-  public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol) {
+  public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol)
+  {
     $permisos = 1;
     $contrasena = password_hash("tomas12", PASSWORD_DEFAULT);
 
@@ -54,7 +59,8 @@ class Usuario {
     }
   }
 
-  public function obtenerDatos($rut) {
+  public function obtenerDatos($rut)
+  {
     $query = "SELECT * FROM usuarios WHERE rut = ?";
     $stmt = mysqli_prepare($this->conexion, $query);
     mysqli_stmt_bind_param($stmt, "s", $rut);
@@ -64,20 +70,33 @@ class Usuario {
     mysqli_stmt_close($stmt);
 
     if ($usuario) {
-        $respuesta = [
-            'success' => true,
-            'rut' => $usuario['rut'],
-            'nombres' => $usuario['nombres'],
-            'apellidos' => $usuario['apellidos'],
-            'email' => $usuario['email'],
-            'telefono' => $usuario['telefono'],
-            'direccion' => $usuario['direccion'],
-            'rol' => $usuario['rol'],
-            'permisos_id' => $usuario['permisos_id']
-        ];
+      $respuesta = [
+        'success' => true,
+        'rut' => $usuario['rut'],
+        'nombres' => $usuario['nombres'],
+        'apellidos' => $usuario['apellidos'],
+        'email' => $usuario['email'],
+        'telefono' => $usuario['telefono'],
+        'direccion' => $usuario['direccion'],
+        'rol' => $usuario['rol'],
+        'permisos_id' => $usuario['permisos_id']
+      ];
     } else {
-        $respuesta = ['success' => false];
+      $respuesta = ['success' => false];
     }
     return json_encode($respuesta);
+  }
+
+  public function actualizarDatosPorRut($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $permisos_id) {
+    $query = "UPDATE usuarios SET nombres = ?, apellidos = ?, email = ?, direccion = ?, telefono = ?, rol = ?, permisos_id = ? WHERE rut = ?";
+    
+    $stmt = $this->conexion->prepare($query);
+    $stmt->bind_param("ssssiiis", $nombres, $apellidos, $email, $direccion, $telefono, $rol, $permisos_id, $rut);
+    
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return false;
+    }
 }
 }
