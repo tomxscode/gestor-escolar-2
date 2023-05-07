@@ -17,8 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     
     $direccion = $data->direccion ?? $info['direccion'];
     $telefono = $data->telefono ?? $info['telefono'];
+    $email = $data->email ?? $info['email'];
 
-    $actualizado = $usuario->actualizarDatosPorRut($rut, $info['nombres'], $info['apellidos'], $info['email'], $direccion, $telefono, $info['rol'], $info['permisos_id']);
+    $actualizado = $usuario->actualizarDatosPorRut($rut, $info['nombres'], $info['apellidos'], $email, $direccion, $telefono, $info['rol'], $info['permisos_id']);
     if ($actualizado) {
       echo(json_encode(['success' => true]));
     } else {

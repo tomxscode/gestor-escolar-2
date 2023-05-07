@@ -9,10 +9,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
   var direccionInput, telefonoInput;
   direccionInput = document.querySelector('input[name="direccion"]');
   telefonoInput = document.querySelector('input[name="telefono"]');
+  emailInput = document.querySelector('input[name="email"]');
 
   btnModificar.addEventListener('click', function(event) {
     direccionInput.disabled = false;
     telefonoInput.disabled = false;
+    emailInput.disabled = false;
 
     // Mostrar botón de Guardar
     btnGuardar.style.display = 'block';
@@ -29,6 +31,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
       direccionInput.classList.remove('is-invalid');
     }
   });
+
+  emailInput.addEventListener('input', function() {
+    if (emailInput.value.trim() === '') {
+      emailInput.classList.add('is-invalid');
+    } else {
+      emailInput.classList.remove('is-invalid');
+    }
+  });
   
   telefonoInput.addEventListener('input', function() {
     if (telefonoInput.value.trim() === '') {
@@ -41,13 +51,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
   btnGuardar.addEventListener('click', function(event) {
     let dirValue = direccionInput.value;
     let telValue = telefonoInput.value;
-    if (dirValue.length > 0 && telValue.length > 0) {
+    let emailValue = emailInput.value;
+    if (dirValue.length > 0 && telValue.length > 0 && emailValue.length > 0) {
       fetch('.././core/cuentas/actualizar_por_rut.php', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({direccion: dirValue, telefono: telValue})
+        body: JSON.stringify({direccion: dirValue, telefono: telValue, email: emailValue})
       })
         .then(response => response.json())
         .then(data => {
@@ -67,6 +78,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
       if (telValue.length === 0) {
         telefonoInput.classList.add('is-invalid');
+      }
+      if (emaillValue.length === 0) {
+        emailInput.classList.add('is-invalid');
       }
     }
   });
