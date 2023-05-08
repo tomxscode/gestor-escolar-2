@@ -1,6 +1,6 @@
 <?php
+session_start();
 function visibleDesde($permiso_requerido) {
-  session_start();
   if (!isset($_SESSION['usuario_rol'])) {
       // Si el rol del usuario no está definido en la sesión, no tiene permiso para acceder
       return false;

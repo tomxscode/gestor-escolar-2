@@ -6,7 +6,6 @@ form.addEventListener('submit', function (event) {
 })
 
 function registrarUsuario() {
-  const form = document.getElementById('form-registro');
   const formData = new FormData(form);
   const requestBody = {};
 
@@ -26,6 +25,13 @@ function registrarUsuario() {
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      if (data.success) {
+        let tipo = form.querySelector("#tipo").value;
+        let alertasContainer = document.querySelector("#alertas");
+        if (tipo === "alumno") {
+          alertasContainer.innerHTML = '<div class="alert alert-success">El alumno fue registrado satisfactoriamente</div>';
+        }
+      }
     })
     .catch(error => {
       console.error(error);

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefono = $data->telefono;
     $rol = $data->rol;
     $permisos = 1;
-    $contrasena = password_hash("tomas12", PASSWORD_DEFAULT);
+    $contrasena = password_hash($rut, PASSWORD_DEFAULT);
     echo json_encode($usuario->registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol));
 }
 ?>
