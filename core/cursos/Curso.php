@@ -6,6 +6,9 @@ class Curso {
   }
 
   public function crearCurso($codigo, $concepto, $profesorJefe) {
+    if (empty($codigo) || empty($concepto) || empty($profesorJefe)) {
+      return ['error' => 'Faltan datos obligatorios'];
+    }
     $query = "INSERT INTO cursos (curso_id, detalle, profesor_jefe) VALUES (?,?,?)";
     $stmt = mysqli_prepare($this->conexion, $query);
 

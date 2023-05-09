@@ -6,6 +6,7 @@ $dominio = "http://localhost/gestor-escolar-2";
 $micuenta = $dominio . '/cuenta/micuenta.php';
 $inicio = $dominio . '/index.php';
 $regAlumno = $dominio . '/alumnos/crear.php';
+$cursos = $dominio . '/cursos/index.php';
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-info pr-5 pl-5">
   <a class="navbar-brand" href="<?php echo $inicio; ?>">Mi escuela</a>
@@ -29,11 +30,10 @@ $regAlumno = $dominio . '/alumnos/crear.php';
       <?php if (visibleDesde(3)) : ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Gestión de alumnos
+            Administración
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Opción 1</a>
-            <a class="dropdown-item" href="#">Opción 2</a>
+            <a class="dropdown-item" href="<?php echo $cursos; ?>">Cursos</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo $regAlumno; ?>">Registrar alumno</a>
           </div>

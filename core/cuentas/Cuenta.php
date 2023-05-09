@@ -87,16 +87,38 @@ class Usuario
     return json_encode($respuesta);
   }
 
-  public function actualizarDatosPorRut($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $permisos_id) {
+  public function obtenerPorRol($rol)
+  {
+    $query = "SELECT * FROM usuarios WHERE rol = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+    mysqli_stmt_bind_param($stmt, "s", $rol);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    mysqli_stmt_close($stmt);
+
+    if ($usuarios) {
+      $respuesta = [
+        'success' => true,
+        'usuarios' => $usuarios
+      ];
+    } else {
+      $respuesta = ['success' => false];
+    }
+    return json_encode($respuesta);
+  }
+
+  public function actualizarDatosPorRut($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $permisos_id)
+  {
     $query = "UPDATE usuarios SET nombres = ?, apellidos = ?, email = ?, direccion = ?, telefono = ?, rol = ?, permisos_id = ? WHERE rut = ?";
-    
+
     $stmt = $this->conexion->prepare($query);
     $stmt->bind_param("ssssiiis", $nombres, $apellidos, $email, $direccion, $telefono, $rol, $permisos_id, $rut);
-    
+
     if ($stmt->execute()) {
-        return true;
+      return true;
     } else {
-        return false;
+      return false;
     }
-}
+  }
 }
