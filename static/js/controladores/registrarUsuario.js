@@ -5,6 +5,10 @@ form.addEventListener('submit', function (event) {
   registrarUsuario();
 })
 
+document.addEventListener('DOMContentLoaded', function (event) {
+  obtenerCursos();
+})
+
 function registrarUsuario() {
   const formData = new FormData(form);
   const requestBody = {};
@@ -36,4 +40,21 @@ function registrarUsuario() {
     .catch(error => {
       console.error(error);
     });
+}
+
+function obtenerCursos() {
+  fetch ('.././core/cursos/cursos_obtener.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    let select_cursos = document.getElementById('select-cursos');
+    data.cursos.forEach(curso => {
+      select_cursos.innerHTML += `<option value="${curso.curso_id}">${curso.detalle}</option>`;
+    });
+  })
+  .catch(error => console.error(error));
 }

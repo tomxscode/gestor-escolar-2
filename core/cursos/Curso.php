@@ -53,5 +53,24 @@ class Curso {
     }
     return json_encode($respuesta);
   }
+
+  public function obtenerCursos() {
+    $query = "SELECT * FROM cursos";
+    $stmt = mysqli_prepare($this->conexion, $query);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $cursos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    mysqli_stmt_close($stmt);
+
+    if ($cursos) {
+      $respuesta = [
+        'success' => true,
+        'cursos' => $cursos
+      ];
+    } else {
+      $respuesta = ['success' => false];
+    }
+    return json_encode($respuesta);
+  }
 }
 ?>
