@@ -30,11 +30,31 @@ function registrarUsuario() {
     .then(data => {
       console.log(data);
       if (data.success) {
-        let tipo = form.querySelector("#tipo").value;
-        let alertasContainer = document.querySelector("#alertas");
-        if (tipo === "alumno") {
-          alertasContainer.innerHTML = '<div class="alert alert-success">El alumno fue registrado satisfactoriamente</div>';
-        }
+        let curso = document.getElementById('select-cursos').value;
+        let rut_alumno = document.getElementById('alumno-rut').value;
+
+        // Creación de alumno en la tabla ALUMNOS
+        fetch('.././core/alumnos/alumno_crear.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ curso_id: curso, usuario_id: rut_alumno })
+        })
+          .then(response => response.json())
+          .then(dataAlumno => {
+            if (dataAlumno.success) {
+              let tipo = form.querySelector("#tipo").value;
+              let alertasContainer = document.querySelector("#alertas");
+              if (tipo === "alumno") {
+                alertasContainer.innerHTML = '<div class="alert alert-success">El alumno fue registrado satisfactoriamente</div>';
+              }
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          })
+
       }
     })
     .catch(error => {
@@ -43,18 +63,18 @@ function registrarUsuario() {
 }
 
 function obtenerCursos() {
-  fetch ('.././core/cursos/cursos_obtener.php', {
+  fetch('.././core/cursos/cursos_obtener.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     }
   })
-  .then(response => response.json())
-  .then(data => {
-    let select_cursos = document.getElementById('select-cursos');
-    data.cursos.forEach(curso => {
-      select_cursos.innerHTML += `<option value="${curso.curso_id}">${curso.detalle}</option>`;
-    });
-  })
-  .catch(error => console.error(error));
+    .then(response => response.json())
+    .then(data => {
+      let select_cursos = document.getElementById('select-cursos');
+      data.cursos.forEach(curso => {
+        select_cursos.innerHTML += `<option value="${curso.curso_id}">${curso.detalle}</option>`;
+      });
+    })
+    .catch(error => console.error(error));
 }
