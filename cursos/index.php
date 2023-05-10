@@ -25,6 +25,7 @@
     <div class="row">
       <div class="col-md-8">
         <h2>Listar cursos</h2>
+        <?php require_once "../views/cursos/tabla-cursos.html"; ?>
       </div>
       <div class="col-md-4">
         <h2>Crear curso</h2>
@@ -34,6 +35,7 @@
   </div>
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/cuentas.js"></script>
+  <script src="../static/js/controladores/obtener_cursos.js"></script>
   <script src="../static/js/controladores/crear_curso.js"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@ function crearCurso(codigo, detalle, profesor) {
     if (data.success) {
       alertas.innerHTML = '<div class="alert alert-success">El curso se creó satisfactoriamente</div>';
       formCurso.reset();
+      pintarTablaCurso();
     } else {
       alertas.innerHTML = '<div class="alert alert-danger">Ocurrió un error al registrar el curso</div>';
     }

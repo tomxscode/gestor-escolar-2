@@ -8,7 +8,7 @@ $inicio = $dominio . '/index.php';
 $regAlumno = $dominio . '/alumnos/crear.php';
 $cursos = $dominio . '/cursos/index.php';
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-info pr-5 pl-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-info pr-5 pl-5 mb-2">
   <a class="navbar-brand" href="<?php echo $inicio; ?>">Mi escuela</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
