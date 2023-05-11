@@ -5,3 +5,14 @@ function formatearRut(rut) {
   const cuerpoFormateado = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Formatear cuerpo con puntos
   return `${cuerpoFormateado}-${digitoVerificador}`; // Devolver RUT formateado
 }
+
+function rutToPlainText(rut) {
+  // Eliminar puntos y guión
+  let rutSinPuntosNiGuion = rut.replace(/\./g,'').replace(/\-/g,'');
+  // Extraer dígito verificador
+  let dv = rutSinPuntosNiGuion.slice(-1);
+  // Extraer número sin dígito verificador
+  let num = rutSinPuntosNiGuion.slice(0, -1);
+  // Unir número y dígito verificador
+  return `${num}-${dv}`;
+}

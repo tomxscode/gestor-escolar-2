@@ -37,5 +37,6 @@
   <script src="../static/js/controladores/cuentas.js"></script>
   <script src="../static/js/controladores/obtener_cursos.js"></script>
   <script src="../static/js/controladores/crear_curso.js"></script>
+  <script src="../static/js/controladores/editarCurso.js"></script>
 </body>
 </html>

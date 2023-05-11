@@ -54,6 +54,26 @@ class Curso {
     return json_encode($respuesta);
   }
 
+  public function modificarCurso($codigo, $detalle, $profesorJefe) {
+    $query = "UPDATE cursos SET curso_id = ?, detalle = ?, profesor_jefe = ? WHERE curso_id = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+
+    if (!$stmt) {
+      $peticion = ['error' => 'Error al editar el curso'];
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $codigo, $detalle, $profesorJefe, $codigo);
+
+    if (mysqli_stmt_execute($stmt)) {
+      $peticion = ['success' => 'true', 'info' => 'El curso fue editado satisfactoriamente'];
+    } else {
+      $peticion = ['error' => 'Error al editar el curso'];
+    }
+
+    mysqli_stmt_close($stmt);
+    return json_encode($peticion);
+  }
+
   public function obtenerCursos() {
     $query = "SELECT * FROM cursos";
     $stmt = mysqli_prepare($this->conexion, $query);
