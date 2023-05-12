@@ -2,6 +2,8 @@
 
 class Usuario
 {
+  // INFO
+  // SEXO 1: hombre 0: mujer
   private $conexion;
 
   public function __construct($conexion)
@@ -36,19 +38,19 @@ class Usuario
     return ['success' => true];
   }
 
-  public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol)
+  public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $sexo)
   {
     $permisos = 1;
-    $contrasena = password_hash("tomas12", PASSWORD_DEFAULT);
+    $contrasena = password_hash($rut, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO usuarios (rut, nombres, apellidos, email, contrasena, direccion, telefono, rol, permisos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO usuarios (rut, nombres, apellidos, email, contrasena, direccion, telefono, rol, permisos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($this->conexion, $query);
 
     if (!$stmt) {
       return ['error' => 'Error al preparar la consulta: ' . mysqli_error($this->conexion)];
     }
 
-    mysqli_stmt_bind_param($stmt, "ssssssiii", $rut, $nombres, $apellidos, $email, $contrasena, $direccion, $telefono, $rol, $permisos);
+    mysqli_stmt_bind_param($stmt, "ssssssiiii", $rut, $nombres, $apellidos, $email, $contrasena, $direccion, $telefono, $rol, $permisos, $sexo);
     $registro_exitoso = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
@@ -79,7 +81,8 @@ class Usuario
         'telefono' => $usuario['telefono'],
         'direccion' => $usuario['direccion'],
         'rol' => $usuario['rol'],
-        'permisos_id' => $usuario['permisos_id']
+        'permisos_id' => $usuario['permisos_id'],
+        'sexo' => $usuario['sexo']
       ];
     } else {
       $respuesta = ['success' => false];

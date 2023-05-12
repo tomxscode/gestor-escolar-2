@@ -128,6 +128,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         break;
     }
     rolInput.value = titulo;
+
+    let sexoInput = formMiCuenta.querySelector('[name="sexo"]');
+    if (parseInt(sexoInput.value) === 0) {
+      sexoInput.value = "Femenino";
+    } else { sexoInput.value = "Masculino"; }
   }
 
   // Obtiene información y establece valores del formulario
