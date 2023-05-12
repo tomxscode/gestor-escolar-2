@@ -18,6 +18,7 @@ function enviarAlFormulario(codigo_curso) {
     .then(data => {
       btnEditar.style.display = 'inline';
       btnCrear.style.display = 'none';
+      codigoCursoInput.disabled = true;
       codigoCursoInput.value = data.codigo;
       codigo = data.codigo;
       detalle = data.detalle;
@@ -61,4 +62,5 @@ btnEditar.addEventListener('click', function(event) {
 
   btnCrear.style.display = "block";
   btnEditar.style.display = "none";
+  codigoCursoInput.disabled = false;
 })
