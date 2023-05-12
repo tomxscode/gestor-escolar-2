@@ -43,14 +43,14 @@ class Usuario
     $permisos = 1;
     $contrasena = password_hash($rut, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO usuarios (rut, nombres, apellidos, email, contrasena, direccion, telefono, rol, permisos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO usuarios (rut, nombres, apellidos, email, contrasena, direccion, telefono, rol, sexo, permisos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($this->conexion, $query);
 
     if (!$stmt) {
       return ['error' => 'Error al preparar la consulta: ' . mysqli_error($this->conexion)];
     }
 
-    mysqli_stmt_bind_param($stmt, "ssssssiiii", $rut, $nombres, $apellidos, $email, $contrasena, $direccion, $telefono, $rol, $permisos, $sexo);
+    mysqli_stmt_bind_param($stmt, "ssssssiiii", $rut, $nombres, $apellidos, $email, $contrasena, $direccion, $telefono, $rol, $sexo, $permisos);
     $registro_exitoso = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
