@@ -32,11 +32,13 @@
         <?php require_once "../views/cursos/crear.html"; ?>
       </div>
     </div>
+    <?php require_once "../views/cursos/modal.html"; ?>
   </div>
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/cuentas.js"></script>
   <script src="../static/js/controladores/obtener_cursos.js"></script>
   <script src="../static/js/controladores/crear_curso.js"></script>
   <script src="../static/js/controladores/editarCurso.js"></script>
+  <script src="../static/js/controladores/informacion_curso.js"></script>
 </body>
 </html>

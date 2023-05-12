@@ -42,17 +42,30 @@ class Curso {
     mysqli_stmt_close($stmt);
 
     if ($curso) {
+      $profesor_jefe_rut = $curso['profesor_jefe'];
+      
+      // Obtener el nombre y apellido del profesor jefe
+      $query = "SELECT CONCAT(nombres, ' ', apellidos) as nombre_completo FROM usuarios WHERE rut = ?";
+      $stmt = mysqli_prepare($this->conexion, $query);
+      mysqli_stmt_bind_param($stmt, "s", $profesor_jefe_rut);
+      mysqli_stmt_execute($stmt);
+      $resultado = mysqli_stmt_get_result($stmt);
+      $profesor_jefe = mysqli_fetch_assoc($resultado);
+      mysqli_stmt_close($stmt);
+
       $respuesta = [
         'success' => true,
         'codigo' => $curso['curso_id'],
         'curso' => $curso['detalle'],
-        'profesor_jefe_rut' => $curso['profesor_jefe']
+        'profesor_jefe_rut' => $curso['profesor_jefe'],
+        'profesor_jefe_nombre' => $profesor_jefe['nombre_completo']
       ];
     } else {
       $respuesta = ['success' => false];
     }
-    return json_encode($respuesta);
+    return $respuesta;
   }
+
 
   public function modificarCurso($codigo, $detalle, $profesorJefe) {
     $query = "UPDATE cursos SET curso_id = ?, detalle = ?, profesor_jefe = ? WHERE curso_id = ?";
@@ -92,5 +105,27 @@ class Curso {
     }
     return json_encode($respuesta);
   }
+
+  public function contarEstudiantes($codigo) {
+    $query = "SELECT COUNT(*) as total_alumnos FROM alumnos WHERE curso_id = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+    if (!$stmt) {
+      $respuesta = ['success' => false, 'error' => mysqli_error($this->conexion)];
+      return $respuesta;
+    }
+    mysqli_stmt_bind_param($stmt, "s", $codigo);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    if (!$resultado) {
+      $respuesta = ['success' => false, 'error' => mysqli_error($this->conexion)];
+      return $respuesta;
+    }
+    $fila = mysqli_fetch_assoc($resultado);
+    $cantidadAlumnos = $fila['total_alumnos'];
+    mysqli_stmt_close($stmt);
+    $respuesta = ['success' => true, 'cantidad' => $cantidadAlumnos];
+    return $respuesta;
+  }
+  
 }
 ?>

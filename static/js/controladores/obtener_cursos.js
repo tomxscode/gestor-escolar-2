@@ -42,7 +42,9 @@ function crearFilaCurso(curso, callback) {
         fila += `<td>Sin profesor asignado</td>`;
       }
 
-      fila += `<td><button class="btn btn-warning" onclick="enviarAlFormulario('${curso.curso_id}')">Editar</button></td></tr>`;
+      fila += `<td><button class="btn btn-warning" onclick="enviarAlFormulario('${curso.curso_id}')">Editar</button> `;
+      fila += `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInfoCurso">Ver más</button>`;
+      fila += "</td></tr>";
 
       callback(fila);
     })
