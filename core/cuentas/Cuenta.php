@@ -35,6 +35,7 @@ class Usuario
     $_SESSION['usuario_rut'] = $usuario['rut'];
     $_SESSION['usuario_rol'] = $usuario['rol'];
     $_SESSION['usuario_permisos'] = $usuario['permisos_id'];
+    $_SESSION['sesion'] = true;
     return ['success' => true];
   }
 
