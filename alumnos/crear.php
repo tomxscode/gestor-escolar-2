@@ -11,11 +11,10 @@
 <body>
 <?php
   require_once "../core/cuentas/permisos.php";
-  if (!visibleDesde(3)) {
+  require_once "../views/global/header.php";
+  if (!visibleDesde(3) && sesionAutenticada()) {
     require_once "../views/global/sin_permiso.html";
     exit();
-  } else {
-    require_once "../views/global/header.php";
   }
   ?>
   <div class="container">
