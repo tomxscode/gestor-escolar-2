@@ -14,15 +14,12 @@
   require_once "../views/global/header.php";
   ?>
   <div class="container">
+    <div id="alertas"></div>
     <?php 
     if (!sesionAutenticada()) {
       require_once "../views/cuentas/login.html"; 
     } else {
-      echo "
-        <div class ='alert alert-info text-center' id='alertas'>
-          <h5>Ya tienes una sesión iniciada</h5>
-          <p>Selecciona una opción del panel de navegación para continuar</p>
-        </div>";
+      header("Location: ./micuenta.php");
     }
     ?>
   </div>

@@ -21,7 +21,7 @@
   ?>
   <div class="container">
     <div class="row">
-      <div class="alertas" id="alertasContainer"></div>
+      <div class="alertas" id="alertas"></div>
       <div class="col-xl-8">
         <h1>Mi información</h1>
         <?php require_once "../views/cuentas/info_cuenta.html"; ?>

@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const formMiCuenta = document.getElementById('micuenta-form');
   const btnModificar = document.getElementById('btnModificar');
   const btnGuardar = document.getElementById('btnGuardar');
-  const alertasContainer = document.getElementById('alertasContainer');
+  const alertasContainer = document.getElementById('alertas');
 
   btnGuardar.style.display = 'none';
 

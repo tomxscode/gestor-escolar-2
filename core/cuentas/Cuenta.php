@@ -22,13 +22,13 @@ class Usuario
     mysqli_stmt_close($stmt);
 
     if (!$usuario) {
-      return ['error' => 'El email o la contraseña son incorrectos.'];
+      return ['success' => false, 'error' => 'El email o la contraseña son incorrectos.'];
     }
 
     $contrasena_verificada = password_verify($contrasena, $usuario['contrasena']);
 
     if (!$contrasena_verificada) {
-      return ['error' => 'El email o la contraseña son incorrectos.'];
+      return ['success' => false, 'error' => 'El email o la contraseña son incorrectos.'];
     }
 
     session_start();

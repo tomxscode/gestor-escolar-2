@@ -8,7 +8,10 @@ function cerrarSesion() {
         console.log(data);
         let alertaContainer = document.getElementById('alertas');
         if (data.success) {
-            alertaContainer.innerHTML = "La sesión fue cerrada éxitosamente";
+            alertaContainer.innerHTML = "<div class='alert alert-success'>La sesión fue cerrada éxitosamente <br>Continuarás en 5 segundos, por favor, espera</div>";
+            setTimeout(function() {
+                location.reload();
+            }, 5000)
         } else {
             alertaContainer.innerHTML = "<p>Se intentó cerrar sesión, pero no tienes ninguna sesión iniciada o no es válida</p>";
         }
