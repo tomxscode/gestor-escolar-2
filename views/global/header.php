@@ -8,6 +8,7 @@ $inicio = $dominio . '/index.php';
 $regAlumno = $dominio . '/alumnos/crear.php';
 $cursos = $dominio . '/cursos/index.php';
 $iniciarSesion = $dominio . '/cuenta/login.php';
+$cerrarSesionJS = $dominio . '/static/js/controladores/cuentas/cerrar_sesion.js';
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-info pr-5 pl-5 mb-2">
   <a class="navbar-brand" href="<?php echo $inicio; ?>">Mi escuela</a>
@@ -45,6 +46,9 @@ $iniciarSesion = $dominio . '/cuenta/login.php';
         <li class="nav-item">
           <a class="nav-link" href="<?php echo $micuenta; ?>">Mi cuenta</a>
         </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-info" type="menu" onclick="cerrarSesion()">Cerrar sesión</button>
+        </li>
       <?php else : ?>
         <li class="nav item">
           <a href="<?php echo $iniciarSesion; ?>" class="nav-link">Iniciar sesión</a>
@@ -53,3 +57,4 @@ $iniciarSesion = $dominio . '/cuenta/login.php';
     </ul>
   </div>
 </nav>
+<script src="<?php echo $cerrarSesionJS; ?>"></script>
