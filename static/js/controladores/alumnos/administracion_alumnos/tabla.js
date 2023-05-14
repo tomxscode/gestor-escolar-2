@@ -1,10 +1,13 @@
 let tabla = document.getElementById('tabla-alumnos'),
     cantidadAlumnos = document.getElementById('cantidad'),
     alertasContainer = document.getElementById('alertas'),
-    tablaContenedor = document.getElementById('tabla-contenedor');
+    tablaContenedor = document.getElementById('tabla-contenedor'),
+    busqueda_por_nombre = document.getElementById('busqueda_por_nombre');
 document.addEventListener('DOMContentLoaded', function (event) {
     // Ocultar tabla:
     tablaContenedor.style.display = 'none';
+    // Ocultar busqueda por nombre:
+    busqueda_por_nombre.style.display = 'none';
 
     // Evento: click al botón
     let btnCurso = document.getElementById('buscarCurso');
@@ -21,6 +24,7 @@ function pintarTabla(curso) {
         .then(data => {
             if (data.success) {
                 tabla.innerHTML = "";
+                busqueda_por_nombre.style.display = 'block';
                 alertasContainer.innerHTML = "";
                 if (data.total_alumnos < 1) {
                     alertasContainer.innerHTML = `<div class="alert alert-info text-center">El curso no contiene registros</div>`
@@ -47,6 +51,7 @@ function pintarTabla(curso) {
         })
         .catch(error => {
             tablaContenedor.style.display = 'none';
+            busqueda_por_nombre.style.display = 'none';
             alertasContainer.innerHTML = '<div class="alert alert-danger text-center">No existen registros en ese curso o no existe</div>';
         })
 }
