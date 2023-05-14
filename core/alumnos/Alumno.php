@@ -61,4 +61,30 @@ class Alumno
     }
     return $respuesta;
   }
+
+  public function obtenerPorCurso($codigo) {
+    $query = "SELECT alumnos.usuario_id FROM cursos 
+              JOIN alumnos ON cursos.curso_id = alumnos.curso_id
+              WHERE cursos.curso_id = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+  
+    if (!$stmt) {
+      return ['success' => false, 'error' => 'Error al ejecutar la consulta: ' . mysqli_error($this->conexion)];
+    }
+    
+    mysqli_stmt_bind_param($stmt, "s", $codigo);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $consulta = mysqli_fetch_all($resultado);
+    $alumnos = array();
+    for ($i = 0; $i < count($consulta); $i++) {
+      $rut = $consulta[$i][0];
+      $alumno = $this->obtener($rut);
+      if ($alumno['success']) {
+        $alumnos[] = $alumno;
+      }
+    }
+    $total_alumnos = count($alumnos);
+    return ['success' => true, 'alumnos' => $alumnos, 'total_alumnos' => $total_alumnos];
+  }
+  
 }
