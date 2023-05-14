@@ -21,12 +21,13 @@
   <div class="container">
     <div class="alertas" id="alertas"></div>
     <h1>Gestión de alumnos</h1>
-    <p>¿Qué deseas hacer hoy?</p>
+    <p>Seleccione alguna opción para continuar</p>
     <div class="row">
       <?php require_once "../views/administracion/alumnos.html"; ?>
     </div>
   </div>
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/alumnos/base.js"></script>
+  <script src="../static/js/controladores/alumnos/administracion_alumnos/tabla.js"></script>
 </body>
 </html>

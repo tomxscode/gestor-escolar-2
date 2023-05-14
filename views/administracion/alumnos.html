@@ -1,0 +1,34 @@
+<div class="row" id="filtros">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="busc_nombre">Busqueda por nombre:</label>
+            <input type="text" id="busc_nombre" name="busc_nombre" class="form-control">
+            <button type="button" class="form-control btn btn-info mt-2">Filtrar</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="select_curso">Seleccione un curso:</label>
+            <select name="select_curso" id="select_curso" class="form-select"></select>
+            <button class="form-control btn btn-warning mt-2">Buscar</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="table-container table-responsive" id="tabla-contenedor">
+        <table class="table">
+            <thead class="table-dark">
+                <th>RUN</th>
+                <th>Nombre</th>
+                <th>Curso</th>
+                <th>Profesor Jefe</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody class="table-light" id="tabla-alumnos"></tbody>
+            <tfoot class="table-dark text-right">
+                <th colspan="5">Cantidad de alumnos: <span id="cantidad">1</span></th>
+            </tfoot>
+        </table>
+    </div>
+</div>
