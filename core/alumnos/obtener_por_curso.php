@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $request_body = file_get_contents('php://input');
   $data = json_decode($request_body);
 
-  $rut = $data->rut;
+  $codigo = $data->codigo;
 
-  echo json_encode($alumno->obtener($rut));
+  echo json_encode($alumno->obtenerPorCurso($codigo));
 }
 ?>
