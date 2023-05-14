@@ -29,5 +29,6 @@
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/alumnos/base.js"></script>
   <script src="../static/js/controladores/alumnos/administracion_alumnos/tabla.js"></script>
+  <script src="../static/js/controladores/alumnos/administracion_alumnos/pintarSelect.js"></script>
 </body>
 </html>
