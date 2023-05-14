@@ -16,10 +16,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 function pintarTabla(curso) {
+    alertasContainer.innerHTML = `<div class="alert alert-info text-center">Consultado por el curso ${curso}, espere un momento...</div>`
     obtenerPorCurso(curso)
         .then(data => {
             if (data.success) {
                 tabla.innerHTML = "";
+                alertasContainer.innerHTML = "";
+                if (data.total_alumnos < 1) {
+                    alertasContainer.innerHTML = `<div class="alert alert-info text-center">El curso no contiene registros</div>`
+                    throw new Error('No existen alumnos');
+                }
                 let alumnos = data.alumnos;
                 alumnos.forEach(alumno => {
                     let elemento = `
@@ -41,6 +47,6 @@ function pintarTabla(curso) {
         })
         .catch(error => {
             tablaContenedor.style.display = 'none';
-            alertasContainer.innerHTML += '<div class="alert alert-danger text-center">No existen registros en ese curso o no existe</div>';
+            alertasContainer.innerHTML = '<div class="alert alert-danger text-center">No existen registros en ese curso o no existe</div>';
         })
 }
