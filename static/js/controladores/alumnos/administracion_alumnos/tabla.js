@@ -30,7 +30,7 @@ function pintarTabla(curso) {
                 alumnos.forEach(alumno => {
                     let elemento = `
             <tr>
-                <td>${alumno.rut_alumno}</td>
+                <td>${formatearRut(alumno.rut_alumno)}</td>
                 <td>${alumno.nombre_alumno}</td>
                 <td>${alumno.nombre_curso}</td>
                 <td>${alumno.profesor_jefe}</td>
