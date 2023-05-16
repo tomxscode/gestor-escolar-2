@@ -135,6 +135,18 @@ class Usuario
   public function modificarPassword($rut, $passwordActual, $nuevaPassword)
   {
     if ($this->checkContrasena($rut, $passwordActual)) {
+      $query = "SELECT contrasena FROM usuarios WHERE rut = ?";
+      $stmt = mysqli_prepare($this->conexion, $query);
+      mysqli_stmt_bind_param($stmt, "s", $rut);
+      mysqli_stmt_execute($stmt);
+      $resultado = mysqli_stmt_get_result($stmt);
+      $password = mysqli_fetch_assoc($resultado)['contrasena'];
+      mysqli_stmt_close($stmt);
+
+      if (password_verify($nuevaPassword, $password)) {
+        return ['success' => false, 'error' => 'La contraseña nueva es igual a la actual'];
+      }
+
       $nuevaPasswordHash = password_hash($nuevaPassword, PASSWORD_DEFAULT);
       $query = "UPDATE usuarios SET contrasena = ? WHERE rut = ?";
       $stmt = mysqli_prepare($this->conexion, $query);
@@ -146,10 +158,10 @@ class Usuario
       if ($afectados > 0) {
         return ['success' => true];
       } else {
-        return ['error' => 'No se pudo cambiar la contraseña'];
+        return ['success' => false, 'error' => 'No se pudo cambiar la contraseña'];
       }
     } else {
-      return ['error' => 'La contraseña actual no es correcta'];
+      return ['success' => false, 'error' => 'La contraseña actual no es correcta'];
     }
   }
 

@@ -16,3 +16,23 @@ function rutToPlainText(rut) {
   // Unir número y dígito verificador
   return `${num}-${dv}`;
 }
+
+function agregarAlerta(tipo, texto) {
+  let alertaContainer = document.getElementById('alertas');
+  alertaContainer.innerHTML += `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+}
+
+function setAlerta(tipo, texto) {
+  let alertaContainer = document.getElementById('alertas');
+  alertaContainer.innerHTML = `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+}
+
+function agregarAlertaModal(tipo, texto) {
+  let alertaContainer = document.getElementById('alertas-modal');
+  alertaContainer.innerHTML += `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+}
+
+function setAlertaModal(tipo, texto) {
+  let alertaContainer = document.getElementById('alertas-modal');
+  alertaContainer.innerHTML = `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+}

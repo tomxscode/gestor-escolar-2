@@ -24,10 +24,13 @@
       <div class="col-xl-8">
         <h1>Mi información</h1>
         <?php require_once "../views/cuentas/info_cuenta.html"; ?>
+        <?php require_once "../views/cuentas/cambiar_password.html"; ?>
       </div>
     </div>
   </div>
+  <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/modificarSesion.js"></script>
+  <script src="../static/js/controladores/cuentas/micuenta.js"></script>
   <!-- jQuery (requerido para los plugins de JavaScript de Bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

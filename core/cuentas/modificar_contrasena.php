@@ -14,4 +14,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $contraNueva = $data->contraNueva;
 
   $respuesta = $usuario->modificarPassword($rut, $contraActual, $contraNueva);
+  echo json_encode($respuesta);
 }
