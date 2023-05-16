@@ -131,4 +131,43 @@ class Usuario
       return false;
     }
   }
+
+  public function modificarPassword($rut, $passwordActual, $nuevaPassword)
+  {
+    if ($this->checkContrasena($rut, $passwordActual)) {
+      $nuevaPasswordHash = password_hash($nuevaPassword, PASSWORD_DEFAULT);
+      $query = "UPDATE usuarios SET contrasena = ? WHERE rut = ?";
+      $stmt = mysqli_prepare($this->conexion, $query);
+      mysqli_stmt_bind_param($stmt, "ss", $nuevaPasswordHash, $rut);
+      mysqli_stmt_execute($stmt);
+      $afectados = mysqli_stmt_affected_rows($stmt);
+      mysqli_stmt_close($stmt);
+
+      if ($afectados > 0) {
+        return ['success' => true];
+      } else {
+        return ['error' => 'No se pudo cambiar la contraseña'];
+      }
+    } else {
+      return ['error' => 'La contraseña actual no es correcta'];
+    }
+  }
+
+  // Comprueba que una contraseña es válida.
+  public function checkContrasena($rut, $password)
+  {
+    $query = "SELECT contrasena FROM usuarios WHERE rut = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+    mysqli_stmt_bind_param($stmt, "s", $rut);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $passwordActual = mysqli_fetch_assoc($resultado)['contrasena'];
+    mysqli_stmt_close($stmt);
+
+    if (password_verify($password, $passwordActual)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

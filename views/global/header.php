@@ -9,6 +9,7 @@ $regAlumno = $dominio . '/alumnos/crear.php';
 $cursos = $dominio . '/cursos/index.php';
 $iniciarSesion = $dominio . '/cuenta/login.php';
 $gestionAlumnos = $dominio . '/administracion/alumnos.php';
+$crearFuncionario = $dominio . '/administracion/crear_funcionario.php';
 $cerrarSesionJS = $dominio . '/static/js/controladores/cuentas/cerrar_sesion.js';
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-info pr-5 pl-5 mb-2">
@@ -41,6 +42,8 @@ $cerrarSesionJS = $dominio . '/static/js/controladores/cuentas/cerrar_sesion.js'
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="<?php echo $regAlumno; ?>">Registrar alumno</a>
               <a class="dropdown-item" href="<?php echo $gestionAlumnos; ?>">Gestionar alumnos</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="<?php echo $crearFuncionario; ?>">Crear funcionario</a>
             </div>
           </li>
         <?php endif; ?>
