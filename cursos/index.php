@@ -34,6 +34,7 @@
     <?php require_once "../views/cursos/modal.html"; ?>
   </div>
   <script src="../static/js/utilidades.js"></script>
+  <script src="../static/js/controladores/cursos/base.js"></script>
   <script src="../static/js/controladores/cuentas.js"></script>
   <script src="../static/js/controladores/obtener_cursos.js"></script>
   <script src="../static/js/controladores/crear_curso.js"></script>

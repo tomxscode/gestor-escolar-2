@@ -66,6 +66,26 @@ class Curso {
     return $respuesta;
   }
 
+  public function eliminar($codigo) {
+    $query = "DELETE FROM cursos WHERE curso_id = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+
+    if (!$stmt) {
+        $respuesta = ['error' => 'Error al eliminar el curso'];
+        return $respuesta;
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $codigo);
+    if (mysqli_stmt_execute($stmt)) {
+        $respuesta = ['success' => true, 'info' => 'El curso fue eliminado'];
+    } else {
+        $respuesta = ['success' => false, 'info' => 'Hubo un error al eliminar el curso'];
+    }
+    mysqli_stmt_close($stmt);
+    return $respuesta;
+}
+
+
 
   public function modificarCurso($codigo, $detalle, $profesorJefe) {
     $query = "UPDATE cursos SET curso_id = ?, detalle = ?, profesor_jefe = ? WHERE curso_id = ?";
