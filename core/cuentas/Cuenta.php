@@ -41,6 +41,11 @@ class Usuario
 
   public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $sexo)
   {
+    // Verificar que todos los campos estén llenos
+    if (empty($rut) || empty($nombres) || empty($apellidos) || empty($email) || empty($direccion) || empty($telefono) || empty($rol) || empty($sexo)) {
+      return ['error' => 'Por favor, completa todos los campos'];
+    }
+
     $permisos = 1;
     $contrasena = password_hash($rut, PASSWORD_DEFAULT);
 
@@ -61,6 +66,7 @@ class Usuario
       return ['error' => 'Error al registrar el usuario. Por favor, intenta de nuevo.'];
     }
   }
+
 
   public function obtenerDatos($rut)
   {

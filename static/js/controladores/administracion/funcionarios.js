@@ -29,16 +29,18 @@ function crearFuncionario(rut, nombres, apellidos, email, direccion, telefono, r
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       if (data.success) {
         enviarAlerta("success", "El funcionario fue creado exitosamente");
       } else {
-        enviarAlerta("danger", "Ocurrió un error al crear el funcionario, re-intente")
+        if ( (data.error).length != 0 ) {
+          enviarAlerta("warning", data.error);
+        } else {
+          enviarAlerta("danger", "Ocurrió un error al crear el funcionario, re-intente")
+        }
       }
     })
 }
 
 function enviarAlerta(tipo, alerta) {
   alertasContainer.innerHTML = `<div class="alert alert-${tipo} text-center">${alerta}</div>`;
-  console.log(alertasContainer);
 }
