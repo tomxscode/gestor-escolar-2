@@ -19,13 +19,13 @@
   ?>
   <div class="container">
     <div class="alertas" id="alertas"></div>
-    <h1>Gestión de funcionario</h1>
-    <p>¿Qué deseas hacer hoy?</p>
+    <h1>Creación de funcionario</h1>
+    <p>Crea un nuevo funcionario por rol</p>
     <div class="row">
       <?php require_once "../views/administracion/crear_funcionario.html"; ?>
     </div>
   </div>
   <script src="../static/js/utilidades.js"></script>
-  <script src="../static/js/controladores/crear_funcionario.js"></script>
+  <script src="../static/js/controladores/administracion/funcionarios.js"></script>
 </body>
 </html>
