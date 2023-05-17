@@ -1,0 +1,1 @@
+let rutUsuario = obtenerRut()
