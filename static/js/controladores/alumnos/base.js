@@ -1,17 +1,28 @@
 function obtenerPorRut(rut) {
-    fetch('.././core/alumnos/alumno_obtener.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ rut })
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
+    return new Promise((resolve, reject) => {
+        fetch('.././core/alumnos/alumno_obtener.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rut })
         })
-        .catch(error => console.error(error))
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error en la respuesta de la solicitud');
+            }
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
 }
+
 
 function obtenerPorCurso(curso) {
     return new Promise((resolve, reject) => {

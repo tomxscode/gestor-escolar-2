@@ -1,6 +1,16 @@
-// DOM
+var rutUsuario = 0;
 document.addEventListener('DOMContentLoaded', function (event) {
-
+  // Llamada a la función para obtener y almacenar el rut
+  obtenerRut()
+    .then(() => {
+      // La variable rutUsuario contiene el rut del usuario aquí
+      console.log(rutUsuario);
+      // Puedes utilizar rutUsuario en otras partes de tu proyecto
+    })
+    .catch(error => {
+      // Maneja los errores aquí
+      console.error(error);
+    });
 })
 
 const
@@ -71,4 +81,26 @@ function validarContrasenas(nueva, validacion) {
     }
   }
 
+}
+
+function obtenerRut() {
+  return fetch('.././core/cuentas/obtener_info.php', {
+    method: 'POST',
+    body: JSON.stringify({}),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error en la respuesta de la solicitud');
+      }
+    })
+    .then(data => {
+      return data.rut; // Asignar el valor del rut a la variable
+    })
+    .catch(error => {
+      console.error(error);
+      throw error; // Rechaza la promesa con el error capturado
+    });
 }

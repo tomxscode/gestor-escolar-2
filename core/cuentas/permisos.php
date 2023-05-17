@@ -23,6 +23,17 @@ function visibleDesde($permiso_requerido)
     }
 }
 
+function visiblePara($permiso) {
+    if (sesionAutenticada()) {
+        $rol = $_SESSION['usuario_rol'];
+        if ($permiso === $rol) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 function sesionAutenticada()
 {
     if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['sesion']) && $_SESSION['sesion'] == true) {

@@ -26,11 +26,19 @@
         <?php require_once "../views/cuentas/info_cuenta.html"; ?>
         <?php require_once "../views/cuentas/cambiar_password.html"; ?>
       </div>
+      <div class="col-xl-4">
+        <div class="row">
+          <h3>Mi organización</h3>
+        </div>
+        <?php if (visiblePara(2)) { require_once "../views/cuentas/info_alumno.html"; } ?>
+      </div>
     </div>
   </div>
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/modificarSesion.js"></script>
   <script src="../static/js/controladores/cuentas/micuenta.js"></script>
+  <?php if (visiblePara(2)) { echo('<script src=".././static/js/controladores/alumnos/base.js"></script>'); } ?>
+  <?php if (visiblePara(2)) { echo('<script src=".././static/js/controladores/cuentas/alumno_info.js"></script>'); } ?>
   <!-- jQuery (requerido para los plugins de JavaScript de Bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
