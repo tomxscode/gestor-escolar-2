@@ -1,5 +1,7 @@
 <?php
 
+// NECESITA REESTRUCTURACIÓN DEL CÓDIGO
+
 class Usuario
 {
   // INFO
