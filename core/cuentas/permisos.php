@@ -34,6 +34,32 @@ function visiblePara($permiso) {
     }
 }
 
+function accesoRequerido($rol) {
+    if (sesionAutenticada()) {
+        $rol_actual = $_SESSION['usuario_rol'];
+        if ($rol_actual >= $rol) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function accesoMenorQue($rol) {
+    if (sesionAutenticada()) {
+        $rol_actual = $_SESSION['usuario_rol'];
+        if ($rol_actual <= $rol) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 function sesionAutenticada()
 {
     if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['sesion']) && $_SESSION['sesion'] == true) {
