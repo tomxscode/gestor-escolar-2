@@ -52,6 +52,44 @@ class Usuario
     }
   }
 
+  public function obtenerInfoSimple($rut) {
+    $query = "SELECT rut, nombres, apellidos, email, direccion, telefono, sexo, rol FROM usuarios WHERE rut = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+  
+    if (!$stmt) {
+      return ['success' => false, 'info' => 'Error al preparar la consulta: ' . mysqli_error($this->conexion)];
+    }
+  
+    mysqli_stmt_bind_param($stmt, "s", $rut);
+  
+    if (!mysqli_stmt_execute($stmt)) {
+      return ['success' => false, 'info' => 'Error al ejecutar la consulta: ' . mysqli_stmt_error($stmt)];
+    }
+  
+    $resultado = mysqli_stmt_get_result($stmt);
+    $datos = mysqli_fetch_assoc($resultado);
+  
+    mysqli_stmt_close($stmt);
+  
+    if ($datos) {
+      $respuesta = [
+        'success' => true,
+        'nombres' => $datos['nombres'],
+        'apellidos' => $datos['apellidos'],
+        'email' => $datos['email'],
+        'direccion' => $datos['direccion'],
+        'telefono' => $datos['telefono'],
+        'sexo' => $datos['sexo'],
+        'rol' => $datos['rol']
+      ];
+    } else {
+      $respuesta = ['success' => false];
+    }
+    return $respuesta;
+  }
+  
+  
+
   public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $sexo)
   {
     // Verificar que todos los campos estén llenos
