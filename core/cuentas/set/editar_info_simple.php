@@ -2,7 +2,7 @@
 require_once '../../database/conexion.php';
 require_once '../Cuenta.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = new Usuario($conexion);
 
     $request_body = file_get_contents('php://input');

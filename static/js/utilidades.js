@@ -28,11 +28,15 @@ function setAlerta(tipo, texto) {
 }
 
 function agregarAlertaModal(tipo, texto) {
-  let alertaContainer = document.getElementById('alertas-modal');
-  alertaContainer.innerHTML += `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+  let alertaContainers = document.querySelectorAll('.alerta-modal');
+  alertaContainers.forEach(function (alertaContainer) {
+    alertaContainer.innerHTML += `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+  });
 }
 
 function setAlertaModal(tipo, texto) {
-  let alertaContainer = document.getElementById('alertas-modal');
-  alertaContainer.innerHTML = `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+  let alertaContainers = document.querySelectorAll('.alerta-modal');
+  alertaContainers.forEach(function (alertaContainer) {
+    alertaContainer.innerHTML = `<div class="alert alert-${tipo} text-center">${texto}</div>`;
+  });
 }

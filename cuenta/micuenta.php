@@ -25,6 +25,7 @@
         <h1>Mi información</h1>
         <?php require_once "../views/cuentas/info_cuenta.html"; ?>
         <?php require_once "../views/cuentas/cambiar_password.html"; ?>
+        <?php require_once "../views/cuentas/modificar_datos.html"; ?>
       </div>
       <div class="col-xl-4">
         <div class="row">
@@ -36,6 +37,7 @@
   </div>
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/cuentas/base.js"></script>
+  <script src="../static/js/controladores/cuentas/modificar_informacion.js"></script>
   <!-- jQuery (requerido para los plugins de JavaScript de Bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
