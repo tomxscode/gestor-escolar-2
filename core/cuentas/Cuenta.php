@@ -41,6 +41,17 @@ class Usuario
     return ['success' => true];
   }
 
+  public function getRut() {
+    // Iniciando sesión
+    session_start();
+    // Comprobamos que hay una sesión activa y existe usuario_rut
+    if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['usuario_rut'])) {
+      return ['success' => true, 'rut' => $_SESSION['usuario_rut']];
+    } else {
+      return ['success' => false];
+    }
+  }
+
   public function registro($rut, $nombres, $apellidos, $email, $direccion, $telefono, $rol, $sexo)
   {
     // Verificar que todos los campos estén llenos
