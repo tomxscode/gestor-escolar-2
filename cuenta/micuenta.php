@@ -36,8 +36,6 @@
   </div>
   <script src="../static/js/utilidades.js"></script>
   <script src="../static/js/controladores/cuentas/base.js"></script>
-  <script src="../static/js/controladores/modificarSesion.js"></script>
-  <script src="../static/js/controladores/cuentas/micuenta.js"></script>
   <?php if (visiblePara(2)) { echo('<script src=".././static/js/controladores/alumnos/base.js"></script>'); } ?>
   <?php if (visiblePara(2)) { echo('<script src=".././static/js/controladores/cuentas/alumno_info.js"></script>'); } ?>
   <!-- jQuery (requerido para los plugins de JavaScript de Bootstrap) -->
