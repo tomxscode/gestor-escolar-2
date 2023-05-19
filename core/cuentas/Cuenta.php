@@ -186,6 +186,18 @@ class Usuario
     }
   }
 
+  public function modificarDatos($rut, $email, $telefono, $direccion) {
+    $query = "UPDATE usuarios SET email = ?, telefono = ?, direccion = ? WHERE rut = ?";
+    $stmt = mysqli_prepare($this->conexion, $query);
+    mysqli_stmt_bind_param($stmt, "ssss", $email, $telefono, $direccion, $rut);
+    $resultado = mysqli_stmt_execute($stmt);
+    if($resultado) {
+      return ['success' => true];
+    } else {
+      return ['success' => false];
+    }
+  }
+
   public function modificarPassword($rut, $passwordActual, $nuevaPassword)
   {
     if ($this->checkContrasena($rut, $passwordActual)) {
