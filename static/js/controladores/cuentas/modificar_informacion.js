@@ -15,6 +15,9 @@ formModificarDatos.addEventListener('submit', function (event) {
       if (data.success) {
         setAlertaModal('success', 'La información fue modificada con éxito');
         agregarAlertaModal('info', 'La ventana será recargada en 3 segundos...');
+        setTimeout(function() {
+          location.reload()
+        }, 3000);
       }
     })
     .catch(error => console.error(error))

@@ -10,20 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = json_decode($request_body);
 
   $rut = $_SESSION['usuario_rut'];
+  $email = $data->email ?? '';
 
-  if (accesoMenorQue(2)) {
+  if (accesoMenorQue(2) || empty($email)) {
     $datos = $usuario->obtenerInfoSimple($rut);
     if ($datos['success']) {
       $email = $datos['email'];
     } else {
       echo json_encode(['success' => false, 'info' => 'Ocurrió un error al obtener la información actual']);
     }
-  } else {
-    $email = $data->email;
   }
 
-  $telefono = $data->telefono;
-  $direccion = $data->direccion;
+  $telefono = $data->telefono ?? '';
+  $direccion = $data->direccion ?? '';
 
   // Ejecutando la consulta de modificación de información
   $modificacion = $usuario->modificarDatos($rut, $email, $telefono, $direccion);
