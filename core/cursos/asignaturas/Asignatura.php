@@ -6,15 +6,15 @@ class Asignatura {
         $this->conexion = $conexion;
     }
 
-    public function crear($codigo, $nombre, $profesor, $curso_id) {
-        $query = "INSERT INTO asignaturas VALUES (codigo, nombre, profesor, curso_id) VALUES (?, ?, ?, ?)";
+    public function crear($codigo, $detalle, $descripcion, $profesor, $curso_id) {
+        $query = "INSERT INTO asignaturas (codigo, detalle, descripcion, profesor, curso) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($this->conexion, $query);
         
         if (!$stmt) {
             return ['success' => false, 'error' => 'Error al ejecutar la consulta: ' . mysqli_error($this->conexion)];
         }
 
-        mysqli_stmt_bind_param($stmt, "ssss", $codigo, $nombre, $profesor, $curso_id);
+        mysqli_stmt_bind_param($stmt, "sssss", $codigo, $detalle, $descripcion, $profesor, $curso_id);
 
         $asignaturaCreada = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
@@ -41,8 +41,9 @@ class Asignatura {
             $respuesta = [
                 'success' => true,
                 'codigo' => $consulta['codigo'],
-                'nombre' => $consulta['nombre'],
-                'curso' => $consulta['curso_id'],
+                'nombre' => $consulta['detalle'],
+                'descripcion' => $consulta['descripcion'],
+                'curso' => $consulta['curso'],
                 'profesor' => $consulta['profesor']
             ];
         } else {

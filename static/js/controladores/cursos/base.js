@@ -1,7 +1,3 @@
-document.addEventListener('DOMContentLoaded', function (event) {
-  pintarTablaCurso();
-})
-
 let cursos_tabla = document.getElementById('tabla-cursos');
 let cursoData;
 
@@ -43,6 +39,7 @@ function crearFilaCurso(curso, callback) {
       }
 
       fila += `<td><button class="btn btn-warning" onclick="enviarAlFormulario('${curso.curso_id}')">Editar</button> `;
+      fila += `<button type="button" class="btn btn-primary" onclick="opciones_curso('${curso.curso_id}')">Opciones</button> `;
       fila += `<button type="button" class="btn btn-danger" onclick="eliminarCurso('${curso.curso_id}')">Eliminar</button>`;
       fila += "</td></tr>";
 
@@ -51,6 +48,10 @@ function crearFilaCurso(curso, callback) {
     .catch(error => console.error(error))
 }
 
+function opciones_curso(codigo) {
+  location.href ='./curso.php?codigo=' + codigo;
+  console.log("hola")
+}
 function ordenarTabla(filas) {
   // Ordena la matriz
   filas.sort();
@@ -84,4 +85,19 @@ function eliminarCurso(codigo) {
       }
     })
     .catch(error => console.error(error))
+}
+
+function obtenerCurso(codigo) {
+  return new Promise((resolve, reject) => {
+    fetch('.././core/cursos/informacion_curso.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ codigo })
+    })
+      .then(response => response.json())
+      .then(data => resolve(data))
+      .catch(error => reject(error))
+  });
 }
